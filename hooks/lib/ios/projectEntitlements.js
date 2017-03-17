@@ -113,8 +113,11 @@ function generateAssociatedDomainsContent(pluginPreferences) {
   // generate list of host links
   pluginPreferences.hosts.forEach(function(host) {
     var link = domainsListEntryForHost(host);
-    if (domainsList.indexOf(link) == -1) {
-      domainsList.push(link);
+    if (domainsList.indexOf(link.applink) == -1) {
+      domainsList.push(link.applink);
+    }
+    if (domainsList.indexOf(link.activitycontinuation) == -1) {
+      domainsList.push(link.activitycontinuation);
     }
   });
 
@@ -128,7 +131,10 @@ function generateAssociatedDomainsContent(pluginPreferences) {
  * @return {String} record
  */
 function domainsListEntryForHost(host) {
-  return 'applinks:' + host.name;
+  return {
+    applink: 'applinks:' + host.name,
+    activitycontinuation: 'activitycontinuation:' + host.name
+  }
 }
 
 // endregion
